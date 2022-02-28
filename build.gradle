@@ -1,0 +1,35 @@
+apply plugin: "com.github.ben-manes.versions"
+apply from: './dependencies.gradle'
+
+buildscript {
+    apply from: './dependencies.gradle'
+    ext.kotlin_version = versions.kotlin
+    repositories {
+        google()
+        jcenter()
+
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:' + versions.gradlePlugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
+        classpath "com.github.dcendents:android-maven-gradle-plugin:2.1"
+        classpath "com.github.ben-manes:gradle-versions-plugin:" + versions.gradleVersion
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+
+    tasks.withType(Javadoc).all {
+        enabled = false
+    }
+
+}
